@@ -1,0 +1,5 @@
+FastAPI
+MLflow
+pandas
+pytest
+LangChain
