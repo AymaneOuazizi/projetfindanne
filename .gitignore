@@ -15,6 +15,7 @@ libraries/
 
 # Jupyter
 .ipynb_checkpoints/
+notebooks/
 
 # Data
 data/raw/

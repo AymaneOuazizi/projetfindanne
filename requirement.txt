@@ -3,3 +3,6 @@ MLflow
 pandas
 pytest
 LangChain
+fastapi
+uvicorn
+pydantic-settings
