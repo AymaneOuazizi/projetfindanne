@@ -7,29 +7,27 @@ from src.ingestion.service import (
 def test_content_hash_is_deterministic():
     text = "SAP document"
 
-    hash_1 = calculate_content_hash(text)
-    hash_2 = calculate_content_hash(text)
-
-    assert hash_1 == hash_2
+    assert (
+        calculate_content_hash(text)
+        == calculate_content_hash(text)
+    )
 
 
 def test_different_content_has_different_hash():
-    hash_1 = calculate_content_hash("SAP MM")
-    hash_2 = calculate_content_hash("SAP SD")
+    assert (
+        calculate_content_hash("SAP MM")
+        != calculate_content_hash("SAP SD")
+    )
 
-    assert hash_1 != hash_2
 
-
-def test_split_text():
-    text = "abcdefghij"
+def test_split_text_returns_multiple_chunks():
+    text = "SAP procurement process. " * 100
 
     chunks = split_text(
         content=text,
-        chunk_size=4,
+        chunk_size=200,
+        chunk_overlap=50,
     )
 
-    assert chunks == [
-        "abcd",
-        "efgh",
-        "ij",
-    ]
+    assert len(chunks) > 1
+    assert all(len(chunk) > 0 for chunk in chunks)

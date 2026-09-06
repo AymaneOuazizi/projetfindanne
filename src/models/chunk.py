@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 
+from pgvector.sqlalchemy import Vector
 from sqlalchemy import DateTime, ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -31,6 +32,11 @@ class Chunk(Base):
         nullable=False,
     )
 
+    embedding: Mapped[list[float] | None] = mapped_column(
+            Vector(384),
+            nullable=True,
+        )
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
@@ -41,3 +47,5 @@ class Chunk(Base):
         "Document",
         back_populates="chunks",
     )
+
+    

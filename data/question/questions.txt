@@ -1,0 +1,6 @@
+What is a purchase order?
+How does SAP manage customer orders?
+What does accounts payable track?
+What happens when goods are received?
+Which SAP process handles billing?
+Who invented SAP?

@@ -12,13 +12,41 @@ def calculate_content_hash(content: str) -> str:
 
 def split_text(
     content: str,
-    chunk_size: int = 500,
+    chunk_size: int = 800,
+    chunk_overlap: int = 150,
 ) -> list[str]:
-    chunks = []
+    content = content.strip()
 
-    for start in range(0, len(content), chunk_size):
-        chunk = content[start : start + chunk_size]
-        chunks.append(chunk)
+    if not content:
+        return []
+
+    chunks = []
+    start = 0
+
+    while start < len(content):
+        end = start + chunk_size
+
+        chunk = content[start:end]
+
+        if end < len(content):
+            last_break = max(
+                chunk.rfind("\n\n"),
+                chunk.rfind(". "),
+            )
+
+            if last_break > chunk_size // 2:
+                end = start + last_break + 1
+                chunk = content[start:end]
+
+        chunk = chunk.strip()
+
+        if chunk:
+            chunks.append(chunk)
+
+        if end >= len(content):
+            break
+
+        start = max(end - chunk_overlap, start + 1)
 
     return chunks
 

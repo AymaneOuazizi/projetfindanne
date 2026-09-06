@@ -1,0 +1,32 @@
+[
+  {
+    "id": "q1",
+    "question": "What is a purchase order?",
+    "expected_document": "sap_mm"
+  },
+  {
+    "id": "q2",
+    "question": "What is accounts payable?",
+    "expected_document": "sap_fi"
+  },
+  {
+    "id": "q3",
+    "question": "What does a sales order represent?",
+    "expected_document": "sap_sd"
+  },
+  {
+    "id": "q4",
+    "question": "What is a purchase requisition?",
+    "expected_document": "sap_mm"
+  },
+  {
+    "id": "q5",
+    "question": "Who founded SAP?",
+    "expected_document": null
+  },
+  {
+    "id": "q6",
+    "question": "What is the average dogs age?",
+    "expected_document": null
+  }
+]
