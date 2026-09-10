@@ -1,7 +1,6 @@
 from src.config import settings
 from src.graph.database import driver
 
-
 ENTITY_DOCUMENT_MAPPING = [
     {
         "label": "Module",

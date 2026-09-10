@@ -3,8 +3,9 @@ import hashlib
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from src.models import Chunk, Document
 from src.config import settings
+from src.models import Chunk, Document
+
 
 def calculate_content_hash(content: str) -> str:
     return hashlib.sha256(content.encode("utf-8")).hexdigest()

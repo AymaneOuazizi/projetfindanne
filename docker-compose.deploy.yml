@@ -1,0 +1,96 @@
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+
+    container_name: sap-rag-app
+
+    ports:
+      - "8501:8501"
+
+    env_file:
+      - .env.deploy
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+      neo4j:
+        condition: service_healthy
+
+    volumes:
+      - ./data/raw/sap:/app/data/raw/sap
+      - uploads_data:/app/data/raw/uploads
+
+    restart: unless-stopped
+
+
+  db:
+    image: pgvector/pgvector:pg17
+
+    container_name: sap-rag-db-deploy
+
+    environment:
+      POSTGRES_DB: sap_rag
+      POSTGRES_USER: sap_user
+      POSTGRES_PASSWORD: sap_password
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_deploy_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U sap_user -d sap_rag"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+    restart: unless-stopped
+
+
+  neo4j:
+    image: neo4j:5.26
+
+    container_name: sap-rag-neo4j-deploy
+
+    environment:
+      NEO4J_AUTH: neo4j/sap_graph_password
+
+    ports:
+      - "7475:7474"
+      - "7688:7687"
+
+    volumes:
+      - neo4j_deploy_data:/data
+      - neo4j_deploy_logs:/logs
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+    restart: unless-stopped
+
+
+volumes:
+
+  postgres_deploy_data:
+
+  neo4j_deploy_data:
+
+  neo4j_deploy_logs:
+
+  uploads_data:

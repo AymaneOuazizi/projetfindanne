@@ -2,7 +2,6 @@ from neo4j import GraphDatabase
 
 from src.config import settings
 
-
 driver = GraphDatabase.driver(
     settings.neo4j_uri,
     auth=(

@@ -9,9 +9,22 @@ from src.models.chunk import Chunk
 from src.models.document import Document
 
 
-def load_chunks_for_extraction() -> list[dict]:
+def load_chunks_for_extraction(
+    chunk_ids: list[int] | None = None,
+) -> list[dict]:
+    """
+    Load chunks from PostgreSQL for graph extraction.
+
+    If chunk_ids is None:
+        Load all chunks. This is used for a full graph rebuild.
+
+    If chunk_ids is provided:
+        Load only those chunks. This is used for incremental
+        graph updates.
+    """
+
     with SessionLocal() as session:
-        rows = (
+        query = (
             session.query(
                 Chunk,
                 Document,
@@ -21,6 +34,18 @@ def load_chunks_for_extraction() -> list[dict]:
                 Chunk.document_id
                 == Document.id,
             )
+        )
+
+        if chunk_ids is not None:
+            if not chunk_ids:
+                return []
+
+            query = query.filter(
+                Chunk.id.in_(chunk_ids)
+            )
+
+        rows = (
+            query
             .order_by(
                 Document.id,
                 Chunk.chunk_index,
@@ -92,8 +117,22 @@ def process_chunk(
     }
 
 
-def run_graph_extraction_pipeline() -> dict:
-    chunks = load_chunks_for_extraction()
+def run_graph_extraction_pipeline(
+    chunk_ids: list[int] | None = None,
+) -> dict:
+    """
+    Run graph extraction.
+
+    chunk_ids=None:
+        Process every PostgreSQL chunk.
+
+    chunk_ids=[...]:
+        Process only the specified chunks.
+    """
+
+    chunks = load_chunks_for_extraction(
+        chunk_ids=chunk_ids
+    )
 
     processed = 0
     failed = 0
@@ -131,7 +170,7 @@ def run_graph_extraction_pipeline() -> dict:
                 }
             )
 
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             failed += 1
 
             results.append(

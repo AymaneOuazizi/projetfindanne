@@ -2,7 +2,6 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-
 UPLOAD_DIR = Path(
     "data/raw/uploads"
 )
@@ -39,7 +38,11 @@ def extract_uploaded_text(
     suffix = (
         file_path.suffix.lower()
     )
-
+    if suffix in {".txt", ".md", ".markdown"}:
+            return file_path.read_text(
+                encoding="utf-8",
+                errors="ignore",
+            )
     if suffix == ".txt":
         return file_path.read_text(
             encoding="utf-8",

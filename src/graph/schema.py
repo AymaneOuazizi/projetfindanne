@@ -1,7 +1,6 @@
 from src.config import settings
 from src.graph.database import driver
 
-
 SCHEMA_QUERIES = [
     """
     CREATE CONSTRAINT module_entity_id_unique

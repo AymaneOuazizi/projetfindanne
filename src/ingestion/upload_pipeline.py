@@ -4,8 +4,8 @@ from src.database import SessionLocal
 from src.embeddings.pipeline import (
     generate_missing_embeddings,
 )
-from src.graph.rebuild import (
-    rebuild_knowledge_graph,
+from src.graph.incremental import (
+    sync_knowledge_graph_incrementally,
 )
 from src.ingestion.service import (
     ingest_document,
@@ -23,10 +23,6 @@ def ingest_uploaded_files(
     db = SessionLocal()
 
     try:
-        # ------------------------------------------------
-        # 1. Extract and ingest every uploaded document
-        # ------------------------------------------------
-
         for file_path in file_paths:
             text = extract_uploaded_text(
                 file_path
@@ -48,24 +44,22 @@ def ingest_uploaded_files(
 
             ingested_documents.append(
                 {
-                    "document_id": document.id,
-                    "title": document.title,
-                    "source": document.source,
+                    "document_id": (
+                        document.id
+                    ),
+                    "title": (
+                        document.title
+                    ),
+                    "source": (
+                        document.source
+                    ),
                 }
             )
-
-        # ------------------------------------------------
-        # 2. Generate embeddings
-        # ------------------------------------------------
 
         if ingested_documents:
             generate_missing_embeddings()
 
-            # --------------------------------------------
-            # 3. Rebuild Neo4j knowledge graph
-            # --------------------------------------------
-
-            rebuild_knowledge_graph()
+            sync_knowledge_graph_incrementally()
 
         return ingested_documents
 

@@ -7,7 +7,6 @@ from src.graph.retrieval_schemas import (
     GraphRelationResult,
 )
 
-
 ALLOWED_GRAPH_RELATIONSHIPS = {
     "CONTAINS_PROCESS",
     "USES_OBJECT",

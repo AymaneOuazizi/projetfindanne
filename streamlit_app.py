@@ -12,7 +12,6 @@ from src.ingestion.upload_pipeline import (
     ingest_uploaded_files,
 )
 
-
 st.set_page_config(
     page_title=(
         "SAP RAG Platform"
@@ -67,15 +66,15 @@ with st.sidebar:
         "to add them to the knowledge base."
     )
 
-    uploaded_files = (
-        st.file_uploader(
-            "Upload documents",
-            type=[
-                "txt",
-                "pdf",
-            ],
-            accept_multiple_files=True,
-        )
+    uploaded_files = st.file_uploader(
+        "Upload documents",
+        type=[
+            "txt",
+            "md",
+            "markdown",
+            "pdf",
+        ],
+        accept_multiple_files=True,
     )
 
     ingest_button = (

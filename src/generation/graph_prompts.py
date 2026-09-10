@@ -27,14 +27,14 @@ def build_graph_context(
                 chunk_ids = "unknown"
 
             graph_lines.append(
-                (
+                
                     f"[GRAPH FACT {index}]\n"
                     f"{relation.source_name} "
                     f"--{relation.relationship}--> "
                     f"{relation.target_name}\n"
                     f"Supporting chunk IDs: "
                     f"{chunk_ids}"
-                )
+                
             )
 
         sections.append(
@@ -54,7 +54,7 @@ def build_graph_context(
             start=1,
         ):
             source_lines.append(
-                (
+                
                     f"[SOURCE {index}]\n"
                     f"Document: {chunk.title}\n"
                     f"Source: {chunk.source}\n"
@@ -62,7 +62,7 @@ def build_graph_context(
                     f"Chunk index: "
                     f"{chunk.chunk_index}\n\n"
                     f"{chunk.content}"
-                )
+                
             )
 
         sections.append(

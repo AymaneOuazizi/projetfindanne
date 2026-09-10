@@ -1,22 +1,18 @@
 from fastapi import FastAPI
 from sqlalchemy import text
 
-from src.config import settings
-from src.database import engine
-
-from src.api.schemas import (
-    SearchRequest,
-    SearchResponse,
-    SearchResult,
-)
-from src.retrieval.vector import search_similar_chunks
-
 from src.api.schemas import (
     AskRequest,
     AskResponse,
+    SearchRequest,
+    SearchResponse,
+    SearchResult,
     SourceResult,
 )
+from src.config import settings
+from src.database import engine
 from src.generation.rag import answer_question
+from src.retrieval.vector import search_similar_chunks
 
 app = FastAPI(
     title=settings.app_name,

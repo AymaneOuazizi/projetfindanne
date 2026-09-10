@@ -7,7 +7,6 @@ from src.graph.normalization import (
     normalize_entity_id,
 )
 
-
 ALLOWED_LABELS = {
     "Module",
     "Process",

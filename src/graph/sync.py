@@ -5,10 +5,22 @@ from src.models.chunk import Chunk
 from src.models.document import Document
 
 
-def fetch_postgres_documents() -> list[dict]:
+def fetch_postgres_documents(
+    document_ids: list[int] | None = None,
+) -> list[dict]:
     with SessionLocal() as session:
+        query = session.query(Document)
+
+        if document_ids is not None:
+            if not document_ids:
+                return []
+
+            query = query.filter(
+                Document.id.in_(document_ids)
+            )
+
         documents = (
-            session.query(Document)
+            query
             .order_by(Document.id)
             .all()
         )
@@ -25,9 +37,11 @@ def fetch_postgres_documents() -> list[dict]:
         ]
 
 
-def fetch_postgres_chunks() -> list[dict]:
+def fetch_postgres_chunks(
+    chunk_ids: list[int] | None = None,
+) -> list[dict]:
     with SessionLocal() as session:
-        chunks = (
+        query = (
             session.query(
                 Chunk,
                 Document,
@@ -37,6 +51,18 @@ def fetch_postgres_chunks() -> list[dict]:
                 Chunk.document_id
                 == Document.id,
             )
+        )
+
+        if chunk_ids is not None:
+            if not chunk_ids:
+                return []
+
+            query = query.filter(
+                Chunk.id.in_(chunk_ids)
+            )
+
+        chunks = (
+            query
             .order_by(
                 Document.id,
                 Chunk.chunk_index,
@@ -145,13 +171,16 @@ def sync_chunks_to_neo4j(
     return len(chunks)
 
 
-def sync_postgres_to_neo4j() -> dict:
-    documents = (
-        fetch_postgres_documents()
+def sync_postgres_to_neo4j(
+    document_ids: list[int] | None = None,
+    chunk_ids: list[int] | None = None,
+) -> dict:
+    documents = fetch_postgres_documents(
+        document_ids=document_ids
     )
 
-    chunks = (
-        fetch_postgres_chunks()
+    chunks = fetch_postgres_chunks(
+        chunk_ids=chunk_ids
     )
 
     synced_documents = (

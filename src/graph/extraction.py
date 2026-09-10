@@ -9,7 +9,6 @@ from src.graph.extraction_prompts import (
     build_graph_extraction_prompt,
 )
 from src.graph.extraction_schemas import (
-    ExtractedRelationship,
     GraphExtraction,
 )
 from src.graph.normalization import (

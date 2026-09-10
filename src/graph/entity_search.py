@@ -7,7 +7,6 @@ from src.graph.retrieval_schemas import (
     GraphEntityMatch,
 )
 
-
 SEARCHABLE_LABELS = {
     "Module",
     "Process",

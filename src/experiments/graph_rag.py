@@ -14,7 +14,6 @@ from src.graph.statistics import (
     get_graph_statistics,
 )
 
-
 EXPERIMENT_NAME = "sap-rag-comparison"
 RUN_NAME = "graph_rag_baseline_v1"
 

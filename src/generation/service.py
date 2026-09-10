@@ -1,7 +1,10 @@
 from groq import Groq
 
 from src.config import settings
-from src.generation.prompts import (RAGChunk,build_context,)
+from src.generation.prompts import (
+    RAGChunk,
+    build_context,
+)
 
 
 def generate_answer(
