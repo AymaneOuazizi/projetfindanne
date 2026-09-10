@@ -21,6 +21,12 @@ class Settings(BaseSettings):
     groq_api_key: str | None = None
     llm_model: str = "openai/gpt-oss-120b"
 
+
+    neo4j_uri: str = "bolt://localhost:7687"
+    neo4j_user: str = "neo4j"
+    neo4j_password: str = "sap_graph_password"
+    neo4j_database: str = "neo4j"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

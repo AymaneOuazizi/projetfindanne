@@ -27,6 +27,9 @@ def evaluate_hybrid_retrieval(
 
     for item in dataset:
         question = item["question"]
+        category = item.get(
+        "category",
+        "unknown",)
         expected_document = item[
             "expected_document"
         ]
@@ -82,6 +85,7 @@ def evaluate_hybrid_retrieval(
         results.append(
             {
                 "id": item["id"],
+                "category": category,
                 "question": question,
                 "expected_document": (
                     expected_document

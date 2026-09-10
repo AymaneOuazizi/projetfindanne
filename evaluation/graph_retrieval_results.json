@@ -1,0 +1,61 @@
+{
+  "max_hops": 2,
+  "questions_evaluated": 4,
+  "recall_at_k": 1.0,
+  "mrr": 1.0,
+  "average_latency_ms": 51.49910000000091,
+  "results": [
+    {
+      "id": "q1",
+      "question": "What is a purchase order?",
+      "expected_document": "sap_mm",
+      "retrieved_documents": [
+        "sap_mm"
+      ],
+      "relationships_found": 5,
+      "evidence_chunks_found": 1,
+      "hit": true,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 132.05530000050203
+    },
+    {
+      "id": "q2",
+      "question": "What is accounts payable?",
+      "expected_document": "sap_fi",
+      "retrieved_documents": [
+        "sap_fi"
+      ],
+      "relationships_found": 4,
+      "evidence_chunks_found": 1,
+      "hit": true,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 24.854600000253413
+    },
+    {
+      "id": "q3",
+      "question": "What does a sales order represent?",
+      "expected_document": "sap_sd",
+      "retrieved_documents": [
+        "sap_sd"
+      ],
+      "relationships_found": 2,
+      "evidence_chunks_found": 1,
+      "hit": true,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 25.836299999355106
+    },
+    {
+      "id": "q4",
+      "question": "What is a purchase requisition?",
+      "expected_document": "sap_mm",
+      "retrieved_documents": [
+        "sap_mm"
+      ],
+      "relationships_found": 5,
+      "evidence_chunks_found": 1,
+      "hit": true,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 23.250199999893084
+    }
+  ]
+}

@@ -1,32 +1,77 @@
 [
   {
-    "id": "q1",
+    "id": "f1",
+    "category": "factual",
     "question": "What is a purchase order?",
     "expected_document": "sap_mm"
   },
   {
-    "id": "q2",
+    "id": "f2",
+    "category": "factual",
     "question": "What is accounts payable?",
     "expected_document": "sap_fi"
   },
   {
-    "id": "q3",
+    "id": "f3",
+    "category": "factual",
     "question": "What does a sales order represent?",
     "expected_document": "sap_sd"
   },
   {
-    "id": "q4",
+    "id": "f4",
+    "category": "factual",
     "question": "What is a purchase requisition?",
     "expected_document": "sap_mm"
   },
+
   {
-    "id": "q5",
+    "id": "r1",
+    "category": "relational",
+    "question": "What business objects are involved in Procurement?",
+    "expected_document": "sap_mm"
+  },
+  {
+    "id": "r2",
+    "category": "relational",
+    "question": "Which process uses Purchase Order?",
+    "expected_document": "sap_mm"
+  },
+  {
+    "id": "r3",
+    "category": "relational",
+    "question": "Which process uses Sales Order?",
+    "expected_document": "sap_sd"
+  },
+  {
+    "id": "r4",
+    "category": "relational",
+    "question": "Which business object is used by Shipping?",
+    "expected_document": "sap_sd"
+  },
+
+  {
+    "id": "m1",
+    "category": "multi_hop",
+    "question": "Which SAP module is Purchase Order related to through Procurement?",
+    "expected_document": "sap_mm"
+  },
+  {
+    "id": "m2",
+    "category": "multi_hop",
+    "question": "Which SAP module is Sales Order related to through Sales Order Processing?",
+    "expected_document": "sap_sd"
+  },
+
+  {
+    "id": "u1",
+    "category": "unanswerable",
     "question": "Who founded SAP?",
     "expected_document": null
   },
   {
-    "id": "q6",
-    "question": "What is the average dogs age?",
+    "id": "u2",
+    "category": "unanswerable",
+    "question": "What is the average age of dogs?",
     "expected_document": null
   }
 ]

@@ -1,0 +1,48 @@
+{
+  "nodes": 29,
+  "relationships": 45,
+  "labels": [
+    {
+      "label": "BusinessObject",
+      "count": 7
+    },
+    {
+      "label": "Chunk",
+      "count": 3
+    },
+    {
+      "label": "Concept",
+      "count": 2
+    },
+    {
+      "label": "Document",
+      "count": 3
+    },
+    {
+      "label": "Module",
+      "count": 3
+    },
+    {
+      "label": "Process",
+      "count": 11
+    }
+  ],
+  "relationship_types": [
+    {
+      "type": "CONTAINS_PROCESS",
+      "count": 11
+    },
+    {
+      "type": "HAS_CHUNK",
+      "count": 3
+    },
+    {
+      "type": "SUPPORTED_BY",
+      "count": 23
+    },
+    {
+      "type": "USES_OBJECT",
+      "count": 8
+    }
+  ]
+}

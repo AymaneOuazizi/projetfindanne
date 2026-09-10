@@ -36,6 +36,9 @@ def evaluate_hybrid_generation(
 
     for item in dataset:
         question = item["question"]
+        category = item.get(
+        "category",
+        "unknown",)
         expected_document = item[
             "expected_document"
         ]
@@ -94,6 +97,7 @@ def evaluate_hybrid_generation(
         results.append(
             {
                 "id": item["id"],
+                "category": category,
                 "question": question,
                 "expected_document": (
                     expected_document

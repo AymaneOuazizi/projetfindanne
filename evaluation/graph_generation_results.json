@@ -1,0 +1,76 @@
+{
+  "questions_evaluated": 6,
+  "answerable_questions": 4,
+  "unanswerable_questions": 2,
+  "citation_rate": 1.0,
+  "refusal_accuracy": 1.0,
+  "average_latency_ms": 494.08455000017665,
+  "results": [
+    {
+      "id": "q1",
+      "question": "What is a purchase order?",
+      "expected_document": "sap_mm",
+      "answer": "A purchase order is a formal document sent to a supplier. 【SOURCE 1】",
+      "citation_present": true,
+      "refusal": false,
+      "relationships_found": 5,
+      "evidence_chunks_found": 1,
+      "latency_ms": 704.260599999543
+    },
+    {
+      "id": "q2",
+      "question": "What is accounts payable?",
+      "expected_document": "sap_fi",
+      "answer": "Accounts payable is the SAP Financial Accounting process that handles amounts owed to suppliers【SOURCE 1】.",
+      "citation_present": true,
+      "refusal": false,
+      "relationships_found": 4,
+      "evidence_chunks_found": 1,
+      "latency_ms": 769.2395000012766
+    },
+    {
+      "id": "q3",
+      "question": "What does a sales order represent?",
+      "expected_document": "sap_sd",
+      "answer": "A sales order records a customer's request for products or services. 【SOURCE 1】",
+      "citation_present": true,
+      "refusal": false,
+      "relationships_found": 2,
+      "evidence_chunks_found": 1,
+      "latency_ms": 865.366100000756
+    },
+    {
+      "id": "q4",
+      "question": "What is a purchase requisition?",
+      "expected_document": "sap_mm",
+      "answer": "A purchase requisition is an internal request for materials or services. 【SOURCE 1】",
+      "citation_present": true,
+      "refusal": false,
+      "relationships_found": 5,
+      "evidence_chunks_found": 1,
+      "latency_ms": 611.1959999998362
+    },
+    {
+      "id": "q5",
+      "question": "Who founded SAP?",
+      "expected_document": null,
+      "answer": "The provided sources are insufficient to answer the question.",
+      "citation_present": false,
+      "refusal": true,
+      "relationships_found": 0,
+      "evidence_chunks_found": 0,
+      "latency_ms": 7.60430000082124
+    },
+    {
+      "id": "q6",
+      "question": "What is the average dogs age?",
+      "expected_document": null,
+      "answer": "The provided sources are insufficient to answer the question.",
+      "citation_present": false,
+      "refusal": true,
+      "relationships_found": 0,
+      "evidence_chunks_found": 0,
+      "latency_ms": 6.8407999988266965
+    }
+  ]
+}
