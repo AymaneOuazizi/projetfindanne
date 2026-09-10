@@ -16,7 +16,8 @@ class Settings(BaseSettings):
         "paraphrase-multilingual-MiniLM-L12-v2"
     )
     embedding_dimension: int = 384
-
+    chunk_size: int = 800
+    chunk_overlap: int = 150
     groq_api_key: str | None = None
     llm_model: str = "openai/gpt-oss-120b"
 

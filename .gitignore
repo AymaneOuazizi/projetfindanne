@@ -28,3 +28,5 @@ data/processed/
 Thumbs.db
 .env
 .env.docker
+artifacts/
+mlflow.db

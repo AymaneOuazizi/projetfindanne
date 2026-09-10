@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from src.models import Chunk, Document
-
+from src.config import settings
 
 def calculate_content_hash(content: str) -> str:
     return hashlib.sha256(content.encode("utf-8")).hexdigest()
@@ -79,7 +79,11 @@ def ingest_document(
     db.add(document)
     db.flush()
 
-    chunks = split_text(content)
+    chunks = split_text(
+        content=content,
+        chunk_size=settings.chunk_size,
+        chunk_overlap=settings.chunk_overlap,
+    )
 
     for index, chunk_content in enumerate(chunks):
         chunk = Chunk(
