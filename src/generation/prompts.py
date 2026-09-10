@@ -1,9 +1,12 @@
-from src.retrieval.schemas import RetrievedChunk
+from src.retrieval.schemas import (
+    BM25RetrievedChunk,
+    HybridRetrievedChunk,
+    RetrievedChunk,
+)
 
+RAGChunk = (RetrievedChunk| BM25RetrievedChunk| HybridRetrievedChunk)
 
-def build_context(
-    chunks: list[RetrievedChunk],
-) -> str:
+def build_context(chunks: list[RAGChunk],) -> str:
     context_parts = []
 
     for index, chunk in enumerate(chunks, start=1):

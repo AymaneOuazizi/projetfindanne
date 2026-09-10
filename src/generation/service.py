@@ -1,13 +1,12 @@
 from groq import Groq
 
 from src.config import settings
-from src.generation.prompts import build_context
-from src.retrieval.schemas import RetrievedChunk
+from src.generation.prompts import (RAGChunk,build_context,)
 
 
 def generate_answer(
     question: str,
-    chunks: list[RetrievedChunk],
+    chunks: list[RAGChunk],
 ) -> str:
     if not settings.groq_api_key:
         raise RuntimeError(
