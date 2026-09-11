@@ -180,7 +180,7 @@ with st.sidebar:
                     "successfully."
                 )
 
-            except Exception as exc:
+            except Exception as exc: # noqa: BLE001
                 st.error(
                     "Ingestion failed:"
                 )
@@ -388,7 +388,7 @@ with ask_tab:
                                 )
                             )
 
-            except Exception as exc:
+            except Exception as exc: # noqa: BLE001
                 st.error(
                     "An error occurred while "
                     "generating the answer."
@@ -498,7 +498,7 @@ with compare_tab:
                         "error": None,
                     }
 
-                except Exception as exc:
+                except Exception as exc: # noqa: BLE001
                     comparison_results[
                         architecture_name
                     ] = {

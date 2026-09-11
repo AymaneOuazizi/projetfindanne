@@ -1,5 +1,8 @@
 from src.config import settings
 from src.graph.database import driver
+from src.graph.entity_aliases import (
+    get_normalized_aliases,
+)
 from src.graph.normalization import (
     normalize_entity_id,
 )
@@ -8,11 +11,38 @@ from src.graph.retrieval_schemas import (
 )
 
 SEARCHABLE_LABELS = {
+    # SAP-specific ontology
     "Module",
     "Process",
     "BusinessObject",
     "Concept",
+
+    # Generic ontology
+    "Person",
+    "Organization",
+    "Location",
+    "Product",
+    "System",
 }
+
+
+def entity_matches_question(
+    entity_id: str,
+    normalized_question: str,
+) -> bool:
+    # 1. Direct canonical match
+    if entity_id in normalized_question:
+        return True
+
+    # 2. Multilingual alias match
+    aliases = get_normalized_aliases(
+        entity_id
+    )
+
+    return any(
+        alias in normalized_question
+        for alias in aliases
+    )
 
 
 def find_entities_in_question(
@@ -55,16 +85,18 @@ def find_entities_in_question(
             ):
                 continue
 
-            entity_id = (
-                record["entity_id"]
-            )
+            entity_id = record[
+                "entity_id"
+            ]
 
             if not entity_id:
                 continue
 
-            if (
-                entity_id
-                in normalized_question
+            if entity_matches_question(
+                entity_id=entity_id,
+                normalized_question=(
+                    normalized_question
+                ),
             ):
                 matches.append(
                     GraphEntityMatch(
@@ -77,6 +109,16 @@ def find_entities_in_question(
                         label=label,
                     )
                 )
+
+    # Remove duplicates
+    unique_matches = {
+        match.entity_id: match
+        for match in matches
+    }
+
+    matches = list(
+        unique_matches.values()
+    )
 
     matches.sort(
         key=lambda match: len(

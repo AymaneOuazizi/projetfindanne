@@ -8,17 +8,35 @@ from src.graph.normalization import (
 )
 
 ALLOWED_LABELS = {
+    # SAP/domain labels
     "Module",
     "Process",
     "BusinessObject",
     "Concept",
+
+    # Generic labels
+    "Person",
+    "Organization",
+    "Location",
+    "Product",
+    "System",
 }
 
 
 ALLOWED_RELATIONSHIPS = {
+    # SAP/domain relationships
     "CONTAINS_PROCESS",
     "USES_OBJECT",
     "PRECEDES",
+
+    # Generic relationships
+    "WORKS_AT",
+    "STUDIES_AT",
+    "MEMBER_OF",
+    "PART_OF",
+    "LOCATED_IN",
+    "USES",
+    "RELATED_TO",
 }
 
 
@@ -123,6 +141,21 @@ def merge_relationship(
     SET
         relationship.source_chunk_id =
             $source_chunk_id
+
+    SET
+        relationship.source_chunk_ids =
+            CASE
+                WHEN relationship.source_chunk_ids
+                     IS NULL
+                THEN [$source_chunk_id]
+
+                WHEN NOT $source_chunk_id
+                     IN relationship.source_chunk_ids
+                THEN relationship.source_chunk_ids
+                     + $source_chunk_id
+
+                ELSE relationship.source_chunk_ids
+            END
     """
 
     session.run(
